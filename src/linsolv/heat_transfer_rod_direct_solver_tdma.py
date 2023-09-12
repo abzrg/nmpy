@@ -45,7 +45,7 @@ def source(x):
 def main() -> int:
     # Number of grid points along the rod
     # (chose a value no more than 1000, or you'll regret ;)
-    grid_size: int = 1000  # [1]
+    grid_size: int = 10000  # [1]
 
     # Physical parameters
     k = 1e-5  # Heat transfer coefficient (how fast heat is being transferred)
@@ -77,13 +77,6 @@ def main() -> int:
     l[-1] = 0.0
 
     # Coefficient matrix
-    # NOTE:
-    #   diag(v, k): Extract a diagonal or construct a diagonal array
-    #       - if `v` is a 1D array, return a 2D array with `v` on the `k`th
-    #       diagonal. if `v` is a 2D array, return a copy of its `k`th diagonal.
-    #       - Use `k>0` for diagonals above the main diagonal, and 'k<0' for
-    #       diagonals below the main diagonal
-    #       - returns a ndarray
     A = diag(l, -1) + diag(d, 0) + diag(u, 1)
 
     # Right hand side vector
@@ -97,11 +90,15 @@ def main() -> int:
     toc = time.time()
     print(f"It took {toc - tic}s to solve the system with {grid_size} equations")
 
-    # Plot the temperature
-    T = np.reshape(T, [1, grid_size])
-    plt.imshow(T, cmap="inferno", aspect="auto")
-    plt.colorbar()
-    plt.show()
+    # # Plot the temperature
+    # T = np.reshape(T, [1, grid_size])
+    # plt.imshow(T, cmap="inferno", aspect="auto")
+    # plt.colorbar()
+    # plt.show()
+
+    # plt.plot(x, T, label="T")
+    # plt.legend()
+    # plt.show()
 
     return 0
 
