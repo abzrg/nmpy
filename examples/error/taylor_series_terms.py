@@ -7,11 +7,11 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..types.type_aliases import ArrayOrFloat
-from .taylor_series_approx import taylor_series_approx
+from nm.typing import NDArray, NDArrayOrFloat
+from nm.linalg import taylor_series_approx_n
 
 
-def exp_formula(x: ArrayOrFloat, nth_term: int) -> ArrayOrFloat:
+def exp_formula(x: NDArrayOrFloat, nth_term: int) -> NDArrayOrFloat:
     """Taylor Series formula for e^x around a=1"""
     assert nth_term > 0, "Number of terms should be at least 1."
     return (
@@ -24,7 +24,7 @@ def main() -> int:
 
     domain_start: float = -2.0
     domain_end: float = 3.0
-    domain: np.ndarray = np.linspace(domain_start, domain_end, num=grid_size)
+    domain: NDArray = np.linspace(domain_start, domain_end, num=grid_size)
 
     # Number of terms
     num_terms: int = 4
@@ -32,7 +32,7 @@ def main() -> int:
     # Approximation plot
     n: int
     for n in range(1, num_terms + 1):
-        approxs = taylor_series_approx(exp_formula, domain, n)
+        approxs = taylor_series_approx_n(exp_formula, domain, n)
         plt.plot(domain, approxs, label=f"{n} terms")
 
     # Plot of the "exact" graph

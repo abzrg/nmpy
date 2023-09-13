@@ -1,11 +1,11 @@
 """
-Using Numpy's builtin linear algebra solver to solve a system of linear
-equations
+Using Numpy's matrix inverse function to inverse a matrix, to ultimately be used
+in the solution of a system of linear equations
 """
 
-from numpy.linalg import solve
+from numpy.linalg import inv
 
-from ..types.type_aliases import Array
+from nm.typing import NDArray
 
 
 def main() -> int:
@@ -15,7 +15,9 @@ def main() -> int:
     # Right-Hand-Side vector
     b: list[float] = [50.0, 0.0, 0.0]
 
-    x: Array = solve(A, b)
+    Ainv: NDArray = inv(A)
+
+    x: NDArray = Ainv @ b
 
     print(f"{x = }")
 

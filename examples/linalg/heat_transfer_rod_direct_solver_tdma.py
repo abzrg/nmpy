@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy import diag
 
-from .tdma import thomas
+from nm.linalg import tdma
 
 
 def source(x):
@@ -86,15 +86,15 @@ def main() -> int:
 
     # Time the solution process done by Numpy's `solve` function
     tic = time.time()
-    T = thomas(A, b)  # solve into `T` field
+    T = tdma(A, b)  # solve into `T` field
     toc = time.time()
     print(f"It took {toc - tic}s to solve the system with {grid_size} equations")
 
-    # # Plot the temperature
-    # T = np.reshape(T, [1, grid_size])
-    # plt.imshow(T, cmap="inferno", aspect="auto")
-    # plt.colorbar()
-    # plt.show()
+    # Plot the temperature
+    T = np.reshape(T, [1, grid_size])
+    plt.imshow(T, cmap="inferno", aspect="auto")
+    plt.colorbar()
+    plt.show()
 
     # plt.plot(x, T, label="T")
     # plt.legend()

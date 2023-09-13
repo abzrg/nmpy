@@ -5,11 +5,11 @@ Visualizing truncation error of a the Taylor Series of a function as h goes to z
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..types.type_aliases import ArrayOrFloat
-from .forward_euler import forward_euler
+from nm.typing.type_aliases import NDArrayOrFloat
+from nm.error import forward_euler
 
 
-def func(x: ArrayOrFloat) -> ArrayOrFloat:
+def func(x: NDArrayOrFloat) -> NDArrayOrFloat:
     return x**2 - 3 * x - 1
 
 
@@ -21,7 +21,7 @@ def main() -> int:
 
     steps = np.array([1e-1, 1e-2, 1e-2, 1e-4, 1e-6, 1e-8, 1e-10, 1e-12])
 
-    approxs: ArrayOrFloat = forward_euler(func, x, steps)
+    approxs: NDArrayOrFloat = forward_euler(func, x, steps)
 
     trunc_err = abs(true_val - approxs)  # pyright: ignore
 
